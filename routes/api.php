@@ -1,6 +1,5 @@
 <?php
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -12,10 +11,16 @@
 |
 */
 
-Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function () {
+Route::group(['namespace' => 'Api'], function () {
     Route::any('', 'HomeController@index');
     Route::get('user', 'UserController@index');
+    Route::get('token/regenerate', 'UserController@token');
     Route::get('user/orgs', 'UserController@orgs');
     Route::get('org', 'HomeController@org');
-    Route::get('org/{id?}', 'OrgController@index');
+    Route::get('org/{org?}', 'OrgController@index');
+    Route::post('org/{org?}', 'OrgController@password');
+    Route::put('org/{org?}', 'OrgController@update');
+    Route::delete('org/{org?}', 'OrgController@delete');
+    Route::post('join/{org?}', 'OrgController@join');
+    Route::get('stats', 'HomeController@stats');
 });
